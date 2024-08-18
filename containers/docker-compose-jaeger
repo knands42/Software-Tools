@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: software_tools_jaeger
+    ports:
+      - "5775:5775/udp"   # UDP port for tchannel
+      - "6831:6831/udp"   # UDP port for gRPC
+      - "6832:6832/udp"   # UDP port for tchannel
+      - "5778:5778"       # HTTP port for service’s health check
+      - "16686:16686"     # HTTP port for Jaeger UI
+      - "14268:14268"     # HTTP port for Jaeger collector
+      - "14250:14250"     # gRPC port for Jaeger collector
+      - "9411:9411"       # HTTP port for Zipkin compatibility
+    environment:
+      COLLECTOR_ZIPKIN_HTTP_PORT: 9411

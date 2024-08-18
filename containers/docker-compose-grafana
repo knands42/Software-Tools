@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: software_tools_prometheus
+    ports:
+      - 9090:9090
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./.docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      - software_tools_network
+
+  grafana:
+    image: grafana/grafana
+    container_name: software_tools_grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./.docker/grafana:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - software_tools_network
