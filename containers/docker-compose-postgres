@@ -11,7 +11,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=software_tools
+      - POSTGRES_DB=software_tools_db
 
 networks:
   software_tools_network:
