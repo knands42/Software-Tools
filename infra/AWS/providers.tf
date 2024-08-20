@@ -1,8 +1,10 @@
 terraform {
-  required_version = ">=0.13.1"
+  required_version = ">= 1.0"
   required_providers {
-    aws   = ">=3.54.0"
-    local = ">=2.1.0"
+    aws   =  {
+      source = "hashicorp/aws"
+      version = "~> 5.49"
+    }
   }
   # backend "s3" {
   #   bucket = "terraform-locks-caiofernandes00"
@@ -15,5 +17,5 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = local.region
 }

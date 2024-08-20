@@ -3,14 +3,19 @@ variable "prefix" {
   default = "software-tools"
 }
 
-variable "cluster_name" {
+variable "env" {
+  type    = string
+  default = "dev"
+}
+
+variable "eks_cluster_name" {
   type    = string
   default = "software-tools-cluster"
 }
 
-variable "ecr_repository" {
+variable "eks_cluster_version" {
   type    = string
-  default = "software-tools-ecr"
+  default = "1.29"
 }
 
 variable "retention_days" {
