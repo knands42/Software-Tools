@@ -20,3 +20,12 @@ module "my-eks" {
   node_max_size       = var.node_max_size
   node_min_size       = var.node_min_size
 }
+
+module "my-users" {
+  source = "./eks/users"
+  prefix = var.prefix
+  env                 = var.env
+  eks_cluster_name    = var.eks_cluster_name
+  eks_cluster_fullname = module.my-eks.eks_cluster_fullname
+  eks_version         = var.eks_version
+}

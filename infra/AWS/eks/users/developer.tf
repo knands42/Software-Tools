@@ -1,5 +1,5 @@
-resource "aws_iam_user" "eks" {
-  name = "developer-eks"
+resource "aws_iam_user" "developer" {
+  name = "developer"
 }
 
 resource "aws_iam_policy" "developer_eks" {
@@ -28,7 +28,7 @@ resource "aws_iam_user_policy_attachment" "developer_eks" {
 }
 
 resource "aws_eks_access_entry" "developer" {
-  cluster_name      = aws_eks_cluster.eks.name
+  cluster_name      = var.eks_cluster_fullname
   principal_arn     = aws_iam_user.developer.arn
   kubernetes_groups = ["my-viewer"]
 }

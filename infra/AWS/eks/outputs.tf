@@ -31,3 +31,7 @@ resource "local_file" "kubeconfig" {
   filename = "kubeconfig"
   content  = local.kubeconfig
 }
+
+output "eks_cluster_fullname" {
+  value = aws_eks_cluster.cluster.name
+}
