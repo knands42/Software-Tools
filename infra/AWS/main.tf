@@ -29,3 +29,8 @@ module "my-users" {
   eks_cluster_fullname = module.my-eks.eks_cluster_fullname
   eks_version         = var.eks_version
 }
+
+module "my-metrics" {
+  source = "./eks/metrics"
+  eks_cluster_fullname    = module.my-eks.eks_cluster_fullname
+}
