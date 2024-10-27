@@ -1,13 +1,13 @@
 # Terraform
 terraform-setup:
     terraform init
-    terraform apply -target=module.my-vpc -auto-approve
-    terraform apply -target=module.my-eks -auto-approve
-    terraform apply -target=module.my-users -auto-approve
+    terraform apply -target module.my-vpc -auto-approve
+    terraform apply -target module.my-eks -auto-approve
+    terraform apply -target module.my-users -auto-approve
     $(MAKE) kube-setup-users
-    terraform apply -target=module.my-hpa -auto-approve
+    terraform apply -target module.my-hpa -auto-approve
     $(MAKE) kube-setup-hpa
-    terraform apply -target=module.my-autoscaler -auto-approve
+    terraform apply -target module.my-autoscaler -auto-approve
 
 # EKS cmds
 kube-login:
