@@ -15,7 +15,7 @@ variable "eks_version" {
 
 variable "eks_cluster_name" {
   type    = string
-  default = "software-tools-cluster"
+  default = "my-cluster"
 }
 
 variable "eks_cluster_version" {
