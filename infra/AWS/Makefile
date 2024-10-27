@@ -1,8 +1,17 @@
+# Terraform
+terraform-setup:
+    terraform init
+    terraform apply -target=module.my-vpc -auto-approve
+    terraform apply -target=module.my-eks -auto-approve
+    terraform apply -target=module.my-users -auto-approve
+    $(MAKE) kube-setup-users
+    terraform apply -target=module.my-hpa -auto-approve
+    $(MAKE) kube-setup-hpa
+    terraform apply -target=module.my-autoscaler -auto-approve
+
 # EKS cmds
 kube-login:
     aws eks update-kubeconfig --region us-east-1 --name software-tools-dev-my-cluster --profile default
-
-kube-setup: kube-login kube-setup-users kube-setup-hpa
 
 kube-setup-users: kube-login
     kubectl apply -f .\eks\users\templates\viewer-cluster-role.yaml

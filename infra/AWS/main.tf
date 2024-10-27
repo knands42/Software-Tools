@@ -30,7 +30,14 @@ module "my-users" {
   eks_version         = var.eks_version
 }
 
-module "my-metrics" {
-  source = "./eks/metrics"
+module "my-hpa" {
+  source = "./eks/hpa"
+  eks_cluster_fullname    = module.my-eks.eks_cluster_fullname
+}
+
+module "my-autoscaler" {
+  source = "./eks/cluster_autoscaler"
+  region                 = local.region
+  eks_cluster_name        = var.eks_cluster_name
   eks_cluster_fullname    = module.my-eks.eks_cluster_fullname
 }

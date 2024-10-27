@@ -4,6 +4,8 @@ This directory contains the Terraform code to create the base of an AWS cloud pr
 
 In order to achieve this we need to create the following resources:
 
+## VPC
+
 1. **VPC**:
     Define your VPC with the chosen CIDR block. This will be the primary networking environment for your resources.
 
