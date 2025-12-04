@@ -5,6 +5,14 @@ module "my-vpc" {
   env             = var.env
 }
 
+module "my-ec2" {
+  source = "./ec2"
+  prefix = var.prefix
+  env    = var.env
+  vpc_id = module.my-vpc.vpc_id
+  public_subnets = module.my-vpc.public_subnets
+}
+
 module "my-eks" {
   source              = "./eks"
   prefix              = var.prefix
