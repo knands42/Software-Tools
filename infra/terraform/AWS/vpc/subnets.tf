@@ -1,8 +1,8 @@
 // Create dynamic subnets for all availability zones
 resource "aws_subnet" "private_zones" {
     vpc_id                  = aws_vpc.main.id
-    count                   = length(data.aws_availability_zones.available.names)
-    availability_zone       = data.aws_availability_zones.available.names[count.index]
+    count                   = length(data.aws_availability_zones.private_zones.names)
+    availability_zone       = data.aws_availability_zones.private_zones.names[count.index]
     cidr_block              = "10.0.${count.index + 100}.0/24"
     
     tags = {

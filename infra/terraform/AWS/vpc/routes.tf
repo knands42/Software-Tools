@@ -24,6 +24,18 @@ resource "aws_route_table" "public" {
   }
 }
 
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id = aws_vpc.main.id
+  service_name = "com.amazonaws.us-east-1.s3"
+  vpc_endpoint_type = "Gateway"
+
+  route_table_ids = [aws_route_table.private.id]
+
+  tags = {
+    Name = "${var.prefix}-${var.env}-s3-endpoint"
+  }
+}
+
 resource "aws_route_table_association" "private" {
   count          = length(aws_subnet.private_zones)
   subnet_id      = aws_subnet.private_zones[count.index].id
