@@ -51,3 +51,7 @@ variable "vpc_cidr_block" {
 variable "allowed_ip" {
   type = string
 }
+
+variable "ssh_path" {
+  type = string
+}

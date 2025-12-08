@@ -13,6 +13,7 @@ module "my-ec2" {
   public_subnets  = module.my-vpc.public_subnet_ids
   private_subnets = module.my-vpc.private_subnet_ids
   allowed_ip      = var.allowed_ip
+  ssh_path        = var.ssh_path
 }
 
 # module "my-eks" {

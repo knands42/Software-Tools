@@ -21,3 +21,7 @@ variable "private_subnets" {
 variable "allowed_ip" {
   type = string
 }
+
+variable "ssh_path" {
+  type = string
+}

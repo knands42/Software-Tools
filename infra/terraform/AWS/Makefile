@@ -1,18 +1,22 @@
 # Terraform
 
 PUBLIC_IP := $(shell curl -s api.ipify.org)/32
+SSH_PATH := $(shell echo $$HOME/.ssh)
+
+tes:
+	@echo " $(SSH_PATH)"
 
 .PHONY: ec2-setup
 ec2-setup:
 	@echo "Setting up VPC and EC2 with IP: $(PUBLIC_IP)"
 	terraform init
-	terraform apply -target module.my-vpc -var="allowed_ip=$(PUBLIC_IP)" -auto-approve
-	terraform apply -target module.my-ec2 -var="allowed_ip=$(PUBLIC_IP)" -auto-approve
+	terraform apply -target module.my-vpc -var="allowed_ip=$(PUBLIC_IP)" -var="ssh_path=$(SSH_PATH)" -auto-approve
+	terraform apply -target module.my-ec2 -var="allowed_ip=$(PUBLIC_IP)" -var="ssh_path=$(SSH_PATH)" -auto-approve
 
 ec2-destroy:
 	@echo "Destroying VPC and EC2"
-	terraform destroy -target module.my-ec2 -var="allowed_ip=$(PUBLIC_IP)" -auto-approve
-	terraform destroy -target module.my-vpc -var="allowed_ip=$(PUBLIC_IP)" -auto-approve
+	terraform destroy -target module.my-ec2 -var="allowed_ip=$(PUBLIC_IP)" -var="ssh_path=$(SSH_PATH)" -auto-approve
+	terraform destroy -target module.my-vpc -var="allowed_ip=$(PUBLIC_IP)" -var="ssh_path=$(SSH_PATH)" -auto-approve
 
 # EKS cmds
 kube-login:
