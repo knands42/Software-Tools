@@ -1,13 +1,18 @@
 # Terraform
-terraform-setup:
+
+PUBLIC_IP := $(shell curl -s api.ipify.org)/32
+
+.PHONY: ec2-setup
+ec2-setup:
+	@echo "Setting up VPC and EC2 with IP: $(PUBLIC_IP)"
 	terraform init
-	terraform apply -target module.my-vpc -auto-approve
-	terraform apply -target module.my-eks -auto-approve
-	terraform apply -target module.my-users -auto-approve
-	$(MAKE) kube-setup-users
-	terraform apply -target module.my-hpa -auto-approve
-	$(MAKE) kube-setup-hpa
-	terraform apply -target module.my-autoscaler -auto-approve
+	terraform apply -target module.my-vpc -var="allowed_ip=$(PUBLIC_IP)" -auto-approve
+	terraform apply -target module.my-ec2 -var="allowed_ip=$(PUBLIC_IP)" -auto-approve
+
+ec2-destroy:
+	@echo "Destroying VPC and EC2"
+	terraform destroy -target module.my-ec2 -var="allowed_ip=$(PUBLIC_IP)" -auto-approve
+	terraform destroy -target module.my-vpc -var="allowed_ip=$(PUBLIC_IP)" -auto-approve
 
 # EKS cmds
 kube-login:
