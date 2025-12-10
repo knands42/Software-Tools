@@ -16,6 +16,15 @@ module "my-ec2" {
   ssh_path        = var.ssh_path
 }
 
+module "my-acm" {
+  source          = "./acm"
+  prefix          = var.prefix
+  env             = var.env
+  private_subnets = module.my-vpc.private_subnet_ids
+  vpc_cidr_block  = var.vpc_cidr_block
+  vpn_certs_path  = var.vpn_certs_path
+}
+
 # module "my-eks" {
 #   source              = "./eks"
 #   prefix              = var.prefix

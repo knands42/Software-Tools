@@ -37,3 +37,12 @@ override.tf.json
 terraform.rc
 
 .terraform.lock.hcl
+
+# Certs
+*.key
+*.crt
+*.csr
+*.srl
+*.cnf
+*.ovpn
+vpn-certs/

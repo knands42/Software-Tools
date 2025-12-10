@@ -55,3 +55,7 @@ variable "allowed_ip" {
 variable "ssh_path" {
   type = string
 }
+
+variable "vpn_certs_path" {
+  type = string
+}
