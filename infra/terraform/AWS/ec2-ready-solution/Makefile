@@ -17,7 +17,7 @@ ec2-setup:
 
 ec2-destroy:
 	@echo "Destroying VPC and EC2"
-	
+	terraform destroy -target module.my-acm -var="allowed_ip=$(PUBLIC_IP)" -var="ssh_path=$(SSH_PATH)" -var="vpn_certs_path=$(VPN_CERTS_PATH)" -auto-approve
 	terraform destroy -target module.my-ec2 -var="allowed_ip=$(PUBLIC_IP)" -var="ssh_path=$(SSH_PATH)" -var="vpn_certs_path=$(VPN_CERTS_PATH)" -auto-approve
 	terraform destroy -target module.my-vpc -var="allowed_ip=$(PUBLIC_IP)" -var="ssh_path=$(SSH_PATH)" -var="vpn_certs_path=$(VPN_CERTS_PATH)" -auto-approve
 
